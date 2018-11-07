@@ -7,7 +7,14 @@
     </head>
     <body>
         <script type="text/javascript">
-            d3.csv("data.csv", function (data) {
+            var rowConverter = function (d) {
+              return {
+                Food: d.food,
+                Deliciousness: parseFloat(d.Deliciousness)
+              }
+
+            }
+            d3.csv("data.csv", rowConverter, function (data) {
               console.log(data)
             });
           //d3.select("body").append("p").text("New Paragraph");
