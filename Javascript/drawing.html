@@ -20,10 +20,12 @@
 			 d3.csv("food.csv", function(data) {
 			 	console.log(data);
 			 });
-			d3.select("body").selectAll("p")
-					.data(dataset).enter().append("div")
-					.attr("class","bar");
-					});
+			 d3.select("body")
+				.selectAll("p")
+				.data(dataset)
+				.enter()
+				.append("div")
+				.attr("class","bar");
 		</script>
 	</body>
 </html>
