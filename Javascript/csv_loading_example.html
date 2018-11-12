@@ -13,7 +13,8 @@
 			 });
 			d3.select("body").selectAll("p")
 					.data(dataset).enter().append("p")
-					.text(function apple(d) {return d});
+					.text(function apple(d) {return d})
+					.style("color", "red");
 		</script>
 	</body>
 </html>
