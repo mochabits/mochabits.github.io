@@ -13,8 +13,10 @@
 			 });
 			d3.select("body").selectAll("p")
 					.data(dataset).enter().append("p")
-					.text(function apple(d) {return d})
-					.style("color", "red");
+					.text(function (d) {return d})
+					.style("color", function (d) {
+						if d> 10 {return "red"} else {return "black"}
+					});
 		</script>
 	</body>
 </html>
