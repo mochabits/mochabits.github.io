@@ -48,18 +48,19 @@
 							.append("svg")
 							.attr("width",w)
 							.attr("height",h);
-				// Then create a circle
+				// Then create circles
 				var circles =
 					 svg.selectAll("circle")
 							.data(datasetShape)
 							.enter()
 							.append("circle");
+
 			 circles.attr("cx", function(d, i){
-										return (i * 50) + 25
+										return (i * 50) + 25;
 										})
 							 .attr("cy", h/2)
 							 .attr("r", function (d) {
-								 		return (d)
+								 		return (d);
 									});
 
 		</script>
