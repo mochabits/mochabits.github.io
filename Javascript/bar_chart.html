@@ -22,21 +22,22 @@
 										11, 12, 15, 20, 18, 17, 16, 18, 23, 25 ];
 			var svgW = 500;
 			var svgH = 300;
+			var barPadding = 1;
 			// create a svg element
 			var svg = d3.select("body")
 										 .append("svg") // create a canvas
 										 .attr("width", svgW)
 										 .attr("height", svgH);
 
-			// generate rectangulars
+			// generate one rect
 			svg.selectAll("rect")
 				 .data(dataset)
 				 .enter()
 				 .append("rect")
-				 .attr("x",0)
+				 .attr("x",function(d,i){return i*(svgW/dataset.length - barPadding))})
 				 .attr("y",0)
 				 .attr("width", 20)
-				 .attr("height", 100);
+				 .attr("height", function(d){return d*5});
 
 		</script>
 	</body>
