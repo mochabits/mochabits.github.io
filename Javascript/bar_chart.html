@@ -35,7 +35,7 @@
 				 .enter()
 				 .append("rect")
 				 .attr("x",function(d,i){return i*(svgW/dataset.length - barPadding)})
-				 .attr("y",0)
+				 .attr("y",function (d){return svgH-d*5})
 				 .attr("width", 20)
 				 .attr("height", function(d){return d*5});
 
