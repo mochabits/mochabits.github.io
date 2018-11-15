@@ -42,46 +42,52 @@
 				// Create a SVG element
 				var w = 500; // width
 				var h = 50; // height
-				// var svg =
-				// 		d3.select("body")
-				// 			//.select("div.shape")
-				// 			.append("svg")
-				// 			.attr("width",w)
-				// 			.attr("height",h);
-				// // Then create circles
-				// var circles =
-				// 	 svg.selectAll("circle")
-				// 			.data(datasetShape)
-				// 			.enter()
-				// 			.append("circle");
-			 //
-			 // circles.attr("cx", function(d, i){
-				// 						return (i * 50) + 25;
-				// 						})
-				// 			 .attr("cy", h/2)
-				// 			 .attr("r", function (d) {
-				// 				 		return (d);
-				// 					});
 				var svg =
 						d3.select("body")
 							//.select("div.shape")
 							.append("svg")
 							.attr("width",w)
-							.attr("height",h)
-
-					    .selectAll("circle")
+							.attr("height",h);
+				// Then create circles
+				var circles =
+					 svg.selectAll("circle")
 							.data(datasetShape)
 							.enter()
-							.append("circle")
+							.append("circle");
 
-			    		.attr("cx", function(d, i){
+			 circles.attr("cx", function(d, i){
 										return (i * 50) + 25;
 										})
 							 .attr("cy", h/2)
 							 .attr("r", function (d) {
 								 		return (d);
 									});
-							svg;
+			 // Add some colors
+			 circles.attr("fill", "yellow")
+			 				.attr("stroke", "orange")
+							.attr("stroke-width",function (d){
+								return d/2;
+							})
+				// var svg =
+				// 		d3.select("body")
+				// 			//.select("div.shape")
+				// 			.append("svg")
+				// 			.attr("width",w)
+				// 			.attr("height",h)
+				//
+				// 	    .selectAll("circle")
+				// 			.data(datasetShape)
+				// 			.enter()
+				// 			.append("circle")
+				//
+			  //   		.attr("cx", function(d, i){
+				// 						return (i * 50) + 25;
+				// 						})
+				// 			 .attr("cy", h/2)
+				// 			 .attr("r", function (d) {
+				// 				 		return (d);
+				// 					});
+				// 			svg;
 		</script>
 	</body>
 </html>
