@@ -47,12 +47,12 @@
 				 .append("text")
 				 .text(function(d) {return d})
 				 .attr("x",function(d,i){
-					 return i*(svgH/dataset.length-barPadding);
+					 return i*(svgW/dataset.length)+5;
 				 	})
 				 .attr("y",function(d){
-					 return svgH-d*4-2;
+					 return svgH-d*4+15;
 				  });
-
+				 .
 		</script>
 	</body>
 </html>
