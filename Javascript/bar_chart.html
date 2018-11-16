@@ -47,14 +47,14 @@
 				 .append("text")
 				 .text(function(d) {return d})
 				 .attr("x",function(d,i){
-					 return i*(svgW/dataset.length)+2;
+					 return i*(svgW / dataset.length)+ (svgW / dataset.length - barPadding) / 2;
 				 	})
 				 .attr("y",function(d){
 					 return svgH-d*4+15;
 				  })
 				 .attr("font-family","sans-serif")
 				 .attr("font-size","11px")
-				 .attr("font-color","white")
+				 .attr("fill","white");
 
 		</script>
 	</body>
