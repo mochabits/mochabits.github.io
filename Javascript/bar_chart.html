@@ -34,19 +34,19 @@
 				 .data(dataset)
 				 .enter()
 				 .append("rect")
-				 .attr("x",function(d,i){return i*(svgW/dataset.length - barPadding;)})
-				 .attr("y",function (d){return svgH-d*5;})
+				 .attr("x",function(d,i){return i*(svgW/dataset.length - barPadding)})
+				 .attr("y",function (d){return svgH-d*5})
 				 .attr("width", 20)
-				 .attr("height", function(d){return d*5;})
-				 .attr("fill",function(d){ return "rgb(0,0,"+Math.round(d*10)+")";});
+				 .attr("height", function(d){return d*5})
+				 .attr("fill",function(d){ return "rgb(0,0,"+Math.round(d*10)+")"});
 
 			// text
 			svg.selectAll("text")
 				 .data(dataset)
 				 .enter()
 				 .append(function(d) {return d;})
-				 .attr("x",function(d,i){return svgH/dataset.length-barPadding;})
-				 .attr("y",function(d){return svgH-d*4-2;});
+				 .attr("x",function(d,i){return svgH/dataset.length-barPadding})
+				 .attr("y",function(d){return svgH-d*4-2});
 
 		</script>
 	</body>
