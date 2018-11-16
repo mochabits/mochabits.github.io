@@ -46,8 +46,12 @@
 				 .enter()
 				 .append("text")
 				 .text(function(d) {return d})
-				 .attr("x",function(d,i){return i*(svgH/dataset.length-barPadding)})
-				 .attr("y",function(d){return svgH-d*4-2});
+				 .attr("x",function(d,i){
+					 return i*(svgH/dataset.length-barPadding);
+				 	})
+				 .attr("y",function(d){
+					 return svgH-d*4-2;
+				  });
 
 		</script>
 	</body>
