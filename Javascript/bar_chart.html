@@ -34,7 +34,7 @@
 				 .data(dataset)
 				 .enter()
 				 .append("rect")
-				 .attr("x",function(d,i){return i*(svgW/dataset.length - barPadding)})
+				 .attr("x",function(d,i){return i*(svgW/dataset.length - barPadding;)})
 				 .attr("y",function (d){return svgH-d*5;})
 				 .attr("width", 20)
 				 .attr("height", function(d){return d*5;})
@@ -45,6 +45,8 @@
 				 .data(dataset)
 				 .enter()
 				 .append(function(d) {return d;})
+				 .attr("x",function(d,i){return svgH/dataset.length-barPadding;})
+				 .attr("y",function(d){return svgH-d*4-2;});
 
 		</script>
 	</body>
