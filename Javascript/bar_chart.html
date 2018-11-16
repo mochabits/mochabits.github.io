@@ -47,11 +47,12 @@
 				 .append("text")
 				 .text(function(d) {return d})
 				 .attr("text-anchor","middle")
+
 				 .attr("x",function(d,i){
 					 return i*(svgW / dataset.length)+ (svgW / dataset.length - barPadding) / 2;
 				 	})
 				 .attr("y",function(d){
-					 return svgH-d*4+16;
+					 return svgH-d*4+14;
 				  })
 				 .attr("font-family","sans-serif")
 				 .attr("font-size","11px")
