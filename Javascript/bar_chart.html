@@ -38,8 +38,7 @@
 				 .attr("y",function (d){return svgH-d*5})
 				 .attr("width", 20)
 				 .attr("height", function(d){return d*5})
-				 .attr("fill",function(d){rgb(0,0,"+Math.round(d*10)+");
-			 });
+				 .attr("fill",function(d){ return "rgb(0,0,"+Math.round(d*10)+")";});
 
 		</script>
 	</body>
