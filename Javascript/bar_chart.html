@@ -47,7 +47,7 @@
 				 .append("text")
 				 .text(function(d) {return d})
 				 .attr("x",function(d,i){
-					 return i*(svgW / dataset.length)+ (svgW / dataset.length - barPadding) / 2;
+					 return i*(svgW / dataset.length - barPadding)+ (svgW / dataset.length - barPadding) / 2;
 				 	})
 				 .attr("y",function(d){
 					 return svgH-d*4+15;
