@@ -44,8 +44,9 @@
 			svg.selectAll("text")
 				 .data(dataset)
 				 .enter()
-				 .append(function(d) {return d;})
-				 .attr("x",function(d,i){return svgH/dataset.length-barPadding})
+				 .append("text")
+				 .text(function(d) {return d})
+				 .attr("x",function(d,i){return i*(svgH/dataset.length-barPadding)})
 				 .attr("y",function(d){return svgH-d*4-2});
 
 		</script>
