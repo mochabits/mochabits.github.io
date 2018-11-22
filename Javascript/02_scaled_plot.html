@@ -58,9 +58,10 @@
 
 		// create labels
 		svg.selectAll("text")
+			 .data(dataset)
 		   .enter()
 			 .append("text")
-			 .text(function(d){return d[0]& ', '&d[1]})
+			 .text(function(d){return d[0]+ ', '+d[1]})
 			 .attr("x",function(d){return xScale(d[0])})
 			 .attr("y",function(d){return yScale(d[1])})
 			 .attr("font-family","arial")
