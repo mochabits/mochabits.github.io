@@ -22,6 +22,15 @@
 			var xMax = d3.max(function (d) {return d[0]});
 			var yMax = d3.max(function (d) {return d[1]});
 
+			var xScale = d3.scaleLinear;
+			xScale.domain([0,xMax])
+					  .range([0,w]);
+			var yScale = d3.scaleLinear;
+			yScale.domain([0,yMax])
+					  .range([0,h]);
+		 
+
+
 
 			// var dataset = [
 			// 				[5, 20], [480, 90], [250, 50], [100, 33], [330, 95],
