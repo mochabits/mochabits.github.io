@@ -24,8 +24,16 @@
 			// scale(2.5);
 			// scale.domain([100,500]);
 			// scale.range([100,350]);
-			var xMax = d3.max(function (d) {return d[0]});
-			var yMax = d3.max(function (d) {return d[1]});
+			var xMax = d3.max(dataset, function (d) {return d[0]});
+			var yMax = d3.max(dataset, function (d) {return d[1]});
+
+			// var xScale = d3.scaleLinear()
+			// 					 .domain([0, d3.max(dataset, function(d) { return d[0]; })])
+			// 					 .range([padding, w - padding * 2]);
+			//
+			// var yScale = d3.scaleLinear()
+			// 					 .domain([0, d3.max(dataset, function(d) { return d[1]; })])
+			// 					 .range([h - padding, padding]);
 
 			var xScale = d3.scaleLinear;
 			xScale.domain([0,xMax])
