@@ -17,7 +17,11 @@
 			var padding = 40;
 		 // variables
 		 var dataset, xScale, yScale;
+
 		 var parseTime = d3.timeParse("%m/%d/%y");
+
+		 var formatTime = d3.formatTime("%b %e");
+
 		 var rowConverter = function (d) {
 			 return {
 				 Date: parseTime(d.Date),
@@ -25,7 +29,11 @@
 			 };
 		 }
 		// load the dataset
-		
+		d3.CSV("time_scale_data.csv", rowConverter, function (data) {
+			dataset = data;
+		// create scale function
+		xScale = d3.scaleTime
+		})
 	</script>
 </body>
 /html>
