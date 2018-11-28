@@ -38,6 +38,18 @@
 								 d3.max(dataset, function(d) {return d.Date})
 							 ])
 							 .range([padding, w-padding]);
+		yScale = d3.scaleLinear()
+							 .domain([
+								 d3.min(dataset, function(d) {return d.Amout}),
+								 d3.max(dataset, function(d) {return d.Amount})
+							 ])
+							 .range([padding, y-padding]);
+		// create a SVG element
+		d3.select("body")
+			.append("svg")
+			.attr("width",w)
+			.attr("height",h)
+			
 		})
 		.attr("cx",function (d){return xScale(d.Date)})
 	</script>
