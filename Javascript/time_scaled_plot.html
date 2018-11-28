@@ -32,8 +32,14 @@
 		d3.CSV("time_scale_data.csv", rowConverter, function (data) {
 			dataset = data;
 		// create scale function
-		xScale = d3.scaleTime
+		xScale = d3.scaleTime()
+							 .domain([
+								 d3.min(dataset, function(d) {return d.Date}),
+								 d3.max(dataset, function(d) {return d.Date})
+							 ])
+							 .range([padding, w-padding]);
 		})
+		.attr("cx",function (d){return xScale(d.Date)})
 	</script>
 </body>
 /html>
