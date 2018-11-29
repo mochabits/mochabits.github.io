@@ -21,7 +21,7 @@
 		 var parseTime = d3.timeParse("%m/%d/%y");
 
 		 var formatTime = d3.timeFormat("%b %e");
-		 			             
+
 		 var rowConverter = function (d) {
 			 return {
 				 Date: parseTime(d.Date),
@@ -29,7 +29,7 @@
 			 };
 		 }
 		// load the dataset
-		d3.CSV("time_scale_data.csv", rowConverter, function (data) {
+		d3.csv("time_scale_data.csv", rowConverter, function (data) {
 			dataset = data;
 		// create scale function
 		xScale = d3.scaleTime()
