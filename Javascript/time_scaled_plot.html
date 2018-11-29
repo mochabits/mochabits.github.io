@@ -43,7 +43,7 @@
 								 d3.min(dataset, function(d) {return d.Amout}),
 								 d3.max(dataset, function(d) {return d.Amount})
 							 ])
-							 .range([padding, y-padding]);
+							 .range([h-padding, padding]);
 		// create a SVG element
 		var svg = d3.select("body")
 			.append("svg")
