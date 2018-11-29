@@ -45,11 +45,19 @@
 							 ])
 							 .range([padding, y-padding]);
 		// create a SVG element
-		d3.select("body")
+		var svg = d3.select("body")
 			.append("svg")
 			.attr("width",w)
-			.attr("height",h)
-			
+			.attr("height",h);
+		// generate date labels
+		svg.selectAll("text")
+			 .data(dataset)
+			 .enter()
+			 .append("text")
+			 .text(function (d) {
+				 
+			 })
+
 		})
 		.attr("cx",function (d){return xScale(d.Date)})
 	</script>
