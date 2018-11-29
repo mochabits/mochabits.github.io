@@ -20,8 +20,8 @@
 
 		 var parseTime = d3.timeParse("%m/%d/%y");
 
-		 var formatTime = d3.formatTime("%b %e");
-
+		 var formatTime = d3.timeFormat("%b %e");
+		 			             
 		 var rowConverter = function (d) {
 			 return {
 				 Date: parseTime(d.Date),
