@@ -36,7 +36,7 @@
 								 .range([0, 10]);
 
 			//Define X axis
-			
+
 			var xAxis = d3.axisBottom()
 							.scale(xScale);
 
@@ -81,7 +81,7 @@
 
 
 			//Create X axis
-			svg.append("g")
+			svg.append("g") // grouping 
 				.attr("class", "axis")
 				.call(xAxis);
 
