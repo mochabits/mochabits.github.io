@@ -81,8 +81,9 @@
 
 
 			//Create X axis
-			svg.append("g") // grouping 
-				.attr("class", "axis")
+			svg.append("g") // grouping
+				.attr("class", "axis") // applying format
+				.attr("transform", "translate(0," + (h-padding) +")")
 				.call(xAxis);
 
 		</script>
