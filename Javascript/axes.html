@@ -49,7 +49,8 @@
 			//Define X axis
 
 			var xAxis = d3.axisBottom()
-							.scale(xScale);
+							.scale(xScale)
+							.tickValues(0,100,200,500,600);
 
 			//Create SVG element
 			var svg = d3.select("body")
