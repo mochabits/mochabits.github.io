@@ -1,4 +1,4 @@
-const canvas = d3.select(".vanvas");
+const canvas = d3.select(".canvas");
 const svg = canvas.append ('svg');
 
 // append shapes to svg container
