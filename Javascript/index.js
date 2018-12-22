@@ -24,3 +24,9 @@ svg.append('line')
    .attr('y1',300)
    .attr('y2',400)
    .attr('stroke','orange');
+
+svg.append('text')
+  .attr('x',175)
+  .attr('y',200)
+  .attr('fill',"grey")
+  .text("hello, ninjas");
