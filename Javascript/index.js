@@ -1,7 +1,7 @@
 const canvas = d3.select(".canvas");
 const svg = canvas.append ('svg')
             .attr('height', 600)
-            .attr('weight', 600);
+            .attr('weight', 800);
 // append shapes to svg container
 const grouping =svg.append('g')
                    .attr('transform','translate(0,100)');
