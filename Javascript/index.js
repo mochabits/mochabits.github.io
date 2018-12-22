@@ -3,7 +3,8 @@ const svg = canvas.append ('svg')
             .attr('height', 600)
             .attr('weight', 600);
 // append shapes to svg container
-const grouping =svg.append('g');
+const grouping =svg.append('g')
+                   .attr('transform','translate(0,100)');
 
 
 
