@@ -3,14 +3,18 @@ const svg = canvas.append ('svg')
             .attr('height', 600)
             .attr('weight', 600);
 // append shapes to svg container
-svg.append('rect')
+const grouping =svg.append('g');
+
+
+
+grouping.append('rect')
    .attr('width', 200)
    .attr('height',100)
    .attr('fill', 'blue')
    .attr('x',20)
    .attr('y',20);
 
-svg.append('circle')
+grouping.append('circle')
   .attr('cx',300)
    .attr('cy',70)
    .attr('r',150)
@@ -18,7 +22,7 @@ svg.append('circle')
    .attr('stroke','red')
    .attr('stroke-width',2);
 
-svg.append('line')
+grouping.append('line')
    .attr('x1',100)
    .attr('x2',200)
    .attr('y1',300)
