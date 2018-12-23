@@ -5,8 +5,12 @@ const data = [
 ];
 
 const svg = d3.select("svg");
-svg.selectAll("rect")
+const rects = svg.selectAll("rect")
   .data(data)
   .attr("width",(d,i,n) =>  d.width)
   .attr("height",d => d.height)
   .attr("fill",d =>  d.fill);
+
+  console.log(rects);
+  rects.enter()
+      .append("rect");
