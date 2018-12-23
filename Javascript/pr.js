@@ -1,5 +1,5 @@
 const data = [
-  {width:200, height:100; fill:"purple"};
+  {width:200, height:100, fill:"purple"}
 ];
 
 const svg = d3.select("svg");
