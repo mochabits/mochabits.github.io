@@ -12,5 +12,9 @@ const rects = svg.selectAll("rect")
   .attr("fill",d =>  d.fill);
 
   console.log(rects);
-  rects.enter()
-      .append("rect");
+  rects.enter() // to enternode and append the virtual elements
+      .append("rect")
+      .attr("width",(d,i,n) =>  d.width)
+      .attr("height",d => d.height)
+      .attr("fill",d =>  d.fill);
+    
