@@ -7,4 +7,4 @@ svg.select("rect")
   .data()
   .attr("width",function(d){return d.width})
   .attr("height",function(d){return d.height})
-  .attr("fill",function(d){return d.fill})
+  .attr("fill",function(d){return d.fill});
