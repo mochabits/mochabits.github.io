@@ -1,5 +1,6 @@
 // select svg container
 const svg = d3.select("svg");
+
 d3.json("planets.json").then(data => {
   const cirs = svg.selectAll("circle")
   .data(data);
