@@ -1,10 +1,14 @@
 // select svg container
 const svg = d3.select("svg");
-d3.json("menu.json").then(data => {
 
+d3.json("menu.json").then(data => {
+  const min = d3.min(data,d => d.orders);
+  const max = d3.max(data,d => d.orders);
+  const extent = d3.extent(data, d => d.orders);
 const y = d3.scaleLinear()
-            .domain([0,1000])
+            .domain([0,max])
             .range([0,500]);
+
 
 const x = d3.scaleBand()
           .domain(data.map(item => item.name) )
