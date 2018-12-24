@@ -9,6 +9,8 @@ const y = d3.scaleLinear()
 const x = d3.scaleBand()
           .domain(data.map(item => item.name) )
           .range([0,500])
+          .paddingInner(0.2)
+          .paddingOuter(0.2);
 
 // testing if it works
 // console.log(y(400));
