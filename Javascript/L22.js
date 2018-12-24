@@ -6,6 +6,10 @@ const y = d3.scaleLinear()
             .domain([0,1000])
             .range([0,500]);
 
+const x = d3.scaleBand()
+          .domain(data.map(item => item.name) )
+          .range([0,500])
+
 // testing if it works
 // console.log(y(400));
 // console.log(y(0));
