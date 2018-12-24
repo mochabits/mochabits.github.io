@@ -6,7 +6,7 @@ d3.json("menu.json").then(data => {
   const max = d3.max(data,d => d.orders);
   const extent = d3.extent(data, d => d.orders);
 const y = d3.scaleLinear()
-            .domain([0,extent(0)])
+            .domain([0,extent[0]])
             .range([0,500]);
 
 
