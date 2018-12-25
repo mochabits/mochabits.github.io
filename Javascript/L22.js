@@ -4,6 +4,16 @@ const svg = d3.select(".canvas")
               .attr("width",600)
               .attr("height",600);
 
+// create margins and dimensions
+const margin = {top: 20, right: 20, bottom: 100, left: 100};
+const graphWidth = 600 - margin.right - margin.left;
+const grahHeight = 600 - margin.top - margin.bottom;
+
+const graph = svg.append("g")
+                 .attr("width", graphWidth)
+                 .attr("height", grahHeight)
+
+
 d3.json("menu.json").then(data => {
   const min = d3.min(data,d => d.orders);
   const max = d3.max(data,d => d.orders);
