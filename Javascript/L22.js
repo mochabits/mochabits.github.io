@@ -36,7 +36,7 @@ const x = d3.scaleBand()
 // console.log(y(800));
 
   // join the data to rects
-  const rects = svg.selectAll("rect")
+  const rects = graph.selectAll("rect")
                    .data(data)
         rects.attr("width", x.bandwidth)
              .attr("height",d => y(d.orders) )
