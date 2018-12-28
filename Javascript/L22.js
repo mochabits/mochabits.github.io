@@ -12,6 +12,7 @@ const grahHeight = 600 - margin.top - margin.bottom;
 const graph = svg.append("g")
                  .attr("width", graphWidth)
                  .attr("height", grahHeight)
+                 .attr("transform",`translate(${margin.left},${margin.top})`)
 
 
 d3.json("menu.json").then(data => {
