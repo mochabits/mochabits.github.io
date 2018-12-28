@@ -14,6 +14,8 @@ const graph = svg.append("g")
                  .attr("height", grahHeight)
                  .attr("transform",`translate(${margin.left},${margin.top})`)
 
+// create axis
+
 
 d3.json("menu.json").then(data => {
   const min = d3.min(data,d => d.orders);
