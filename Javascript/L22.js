@@ -46,14 +46,16 @@ const x = d3.scaleBand()
         rects.attr("width", x.bandwidth)
              .attr("height",d => graphHeight - y(d.orders) )
              .attr("fill","orange")
-             .attr("x", d => x(d.name));
+             .attr("x", d => x(d.name))
+             .attr("y", d=> y(d.orders));
   // append the rest of rects
   rects.enter()
        .append("rect")
        .attr("width", x.bandwidth)
       .attr("height",d => graphHeight - y(d.orders) )
       .attr("fill","orange")
-      .attr("x", d => x(d.name));
+      .attr("x", d => x(d.name))
+      .attr("y", d=> y(d.orders));
   
   // create and call the axes
   const xAxis = d3.axisBottom(x);
