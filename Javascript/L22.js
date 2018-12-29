@@ -16,6 +16,8 @@ const graph = svg.append("g")
 
 // create axis
 const xAxisGroup = graph.append("g");
+const yAxisGroup = graph.append("g");
+
 
 d3.json("menu.json").then(data => {
   const min = d3.min(data,d => d.orders);
@@ -51,5 +53,11 @@ const x = d3.scaleBand()
       .attr("height",d => y(d.orders) )
       .attr("fill","orange")
       .attr("x", d => x(d.name));
+  
+  // create and call the axes
+  const xAxis = d3.axisBottom(x);
+  const yAxis = d3.axisLeft(y);
 
+  xAsixGroup.call(xAxis);
+  yAsixGroup.call(yAxis);
 })
