@@ -15,7 +15,8 @@ const graph = svg.append("g")
                  .attr("transform",`translate(${margin.left},${margin.top})`)
 
 // create axis
-const xAxisGroup = graph.append("g");
+const xAxisGroup = graph.append("g")
+      .attr("transform",`translate(0,${graphHeight})`);
 const yAxisGroup = graph.append("g");
 
 
@@ -25,7 +26,7 @@ d3.json("menu.json").then(data => {
   const extent = d3.extent(data, d => d.orders);
 const y = d3.scaleLinear()
             .domain([0,extent[1]])
-            .range([0,500]);
+            .range([0,graphHeight]);
 
 
 const x = d3.scaleBand()
