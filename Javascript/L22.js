@@ -26,7 +26,7 @@ d3.json("menu.json").then(data => {
   const extent = d3.extent(data, d => d.orders);
 const y = d3.scaleLinear()
             .domain([0,extent[1]])
-            .range([0,graphHeight]);
+            .range([graphHeight,0]);
 
 
 const x = d3.scaleBand()
