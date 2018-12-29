@@ -44,14 +44,14 @@ const x = d3.scaleBand()
   const rects = graph.selectAll("rect")
                    .data(data)
         rects.attr("width", x.bandwidth)
-             .attr("height",d => y(d.orders) )
+             .attr("height",d => graphHeight - y(d.orders) )
              .attr("fill","orange")
              .attr("x", d => x(d.name));
   // append the rest of rects
   rects.enter()
        .append("rect")
        .attr("width", x.bandwidth)
-      .attr("height",d => y(d.orders) )
+      .attr("height",d => graphHeight - y(d.orders) )
       .attr("fill","orange")
       .attr("x", d => x(d.name));
   
