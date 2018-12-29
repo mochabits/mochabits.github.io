@@ -58,6 +58,6 @@ const x = d3.scaleBand()
   const xAxis = d3.axisBottom(x);
   const yAxis = d3.axisLeft(y);
 
-  xAsixGroup.call(xAxis);
-  yAsixGroup.call(yAxis);
+  xAxisGroup.call(xAxis);
+  yAxisGroup.call(yAxis);
 })
