@@ -7,11 +7,11 @@ const svg = d3.select(".canvas")
 // create margins and dimensions
 const margin = {top: 20, right: 20, bottom: 100, left: 100};
 const graphWidth = 600 - margin.right - margin.left;
-const grahHeight = 600 - margin.top - margin.bottom;
+const graphHeight = 600 - margin.top - margin.bottom;
 
 const graph = svg.append("g")
                  .attr("width", graphWidth)
-                 .attr("height", grahHeight)
+                 .attr("height", graphHeight)
                  .attr("transform",`translate(${margin.left},${margin.top})`)
 
 // create axis
