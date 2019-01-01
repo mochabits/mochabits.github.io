@@ -2,15 +2,27 @@
 <html lang="en">
 	<head>
 		<meta charset="utf-8">
-		<title>D3 practice</title>
-
+		<title>Heatmap</title>
+        <style>
+            .axis path,
+            .axis line {
+              fill: none;
+              stroke: black;
+              shape-rendering: crispEdges;
+            }
+          
+            .axis text {
+                font-family: sans-serif;
+                font-size: 11px;
+            }
+          </style>
+          
 	</head>
 	<body>
-    <div class="canvas">
-			
-    </div>
-<script type="text/javascript" src="https://d3js.org/d3.v5.js"></script>
-<script type="text/javascript" src="L22.js"></script>
-	</body>
-
+    <div class="heatmap">  </div>
+<!-- <script type="text/javascript" src="https://d3js.org/d3.v5.js"></script> -->
+<script src="//d3js.org/d3.v3.min.js"></script>
+<script type="text/javascript" src="heatmap.js"></script>
+    
+</body>
 </html>
