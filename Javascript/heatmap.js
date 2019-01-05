@@ -2,7 +2,7 @@
 
 // chart settings
 var margin = { top: 50, right: 0, bottom: 100, left: 30 },
-width = 1000 - margin.left - margin.right,
+width = 700 - margin.left - margin.right,
 height = 600 - margin.top - margin.bottom,
 gridSize = Math.floor(width / 10),
 legendElementWidth = gridSize*2,
@@ -19,10 +19,11 @@ var svg = d3.select("#chart").append("svg")
 .append("g")
 .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
- // x axis Dates
+ 
 
 d3.csv("data.csv", function(data) {
     console.log(data);
+    // x axis Dates
     var dateLabels = svg.selectAll(".DateLabel")
         .data(data, function(d){ return d.Date;})
         .enter()
@@ -33,17 +34,19 @@ d3.csv("data.csv", function(data) {
         .style("text-anchor", "middle")
         .attr("transform", "translate(" + gridSize / 2 + ", -6)")
         .attr("class", function(d, i) { return ((i >= 7 && i <= 16) ? "timeLabel mono axis axis-worktime" : "timeLabel mono axis"); });
-});
-// y axis Factors
-// var dayLabels = svg.selectAll(".dayLabel")
-// .data(days)
-// .enter().append("text")
-//   .text(function (d) { return d; })
-//   .attr("x", 0)
-//   .attr("y", function (d, i) { return i * gridSize; })
-//   .style("text-anchor", "end")
-//   .attr("transform", "translate(-6," + gridSize / 1.5 + ")")
-//   .attr("class", function (d, i) { return ((i >= 0 && i <= 4) ? "dayLabel mono axis axis-workweek" : "dayLabel mono axis"); });
+    
+    // y axis Factors
+    var factorLabels = svg.selectAll(".functionLabel")
+    .data(data, function(d){ return d.Factor;})
+    .enter().append("text")
+    .text(function (d) { return d.Factor; })
+    .attr("x", 0)
+    .attr("y", function (d, i) { return i * gridSize; })
+    .style("text-anchor", "end")
+    .attr("transform", "translate(-6," + gridSize / 1.5 + ")")
+    .attr("class", function (d, i) { return ((i >= 0 && i <= 4) ? "dayLabel mono axis axis-workweek" : "dayLabel mono axis"); });
+
+    });
 
 
 /*
