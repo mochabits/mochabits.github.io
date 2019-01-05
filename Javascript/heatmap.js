@@ -1,5 +1,3 @@
-
-
 // chart settings
 var margin = { top: 50, right: 0, bottom: 100, left: 75 },
 width = 700 - margin.left - margin.right,
@@ -39,7 +37,8 @@ d3.csv("data.csv", function(data) {
         .attr("y", 0)
         .style("text-anchor", "middle")
         .attr("transform", "translate(" + gridSize / 2 + ", -6)")
-        .attr("class", function(d, i) { return ((i >= 7 && i <= 16) ? "timeLabel mono axis axis-worktime" : "timeLabel mono axis"); });
+        //.attr("class", function(d, i) { return ((i >= 7 && i <= 16) ? "timeLabel mono axis axis-worktime" : "timeLabel mono axis"); })
+        ;
     
     // y axis Factors
     var factorLabels = svg.selectAll(".factorLabel")
@@ -50,7 +49,8 @@ d3.csv("data.csv", function(data) {
     .attr("y", function (d, i) { return i * gridSize; })
     .style("text-anchor", "end")
     .attr("transform", "translate(-6," + gridSize / 1.5 + ")")
-    .attr("class", function (d, i) { return ((i >= 0 && i <= 4) ? "dayLabel mono axis axis-workweek" : "dayLabel mono axis"); });
+    //.attr("class", function (d, i) { return ((i >= 0 && i <= 4) ? "dayLabel mono axis axis-workweek" : "dayLabel mono axis"); })
+    ;
 
     var colorScale = d3.scale.quantile()
     .domain([0, buckets - 1, d3.max(data, function (d) { return d.value; })])
