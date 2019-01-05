@@ -21,7 +21,7 @@ var svg = d3.select("#chart").append("svg")
 
  // x axis Dates
 
-d3.csv(data.csv, function(data) {
+d3.csv("data.csv", function(data) {
     var dateLabels = svg.selectAll(".DateLabel")
         .data(data, function(d){ return d.Date;})
         .enter()
