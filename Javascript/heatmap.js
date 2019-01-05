@@ -12,7 +12,8 @@ colors = ["#ffffd9","#edf8b1","#c7e9b4","#7fcdbb","#41b6c4","#1d91c0","#225ea8",
 //days = ["Mo", "Tu", "We", "Th", "Fr", "Sa", "Su"],
 //times = ["1a", "2a", "3a", "4a", "5a", "6a", "7a", "8a", "9a", "10a", "11a", "12a", "1p", "2p", "3p", "4p", "5p", "6p", "7p", "8p", "9p", "10p", "11p", "12p"];
 //datasets = ["data.tsv", "data2.tsv"];
-
+var stuff =["Temp High", "Temp Low", "Rain", "Snow"];
+var dateStuff = ["1/1/2019", "1/2/2019", "1/3/2019", "1/4/2019", "1/5/2019"];
 var svg = d3.select("#chart").append("svg")
 .attr("width", width + margin.left + margin.right)
 .attr("height", height + margin.top + margin.bottom)
@@ -50,15 +51,20 @@ d3.csv("data.csv", function(data) {
     .domain([0, buckets - 1, d3.max(data, function (d) { return d.value; })])
     .range(colors);
 
-    // draw the heatmap called cards
+    // draw the heatmap cards
+    // outer factors loop
     var cards = svg.selectAll(".Value")
-        .data(data, function(d) {return d.Date; /*+':'+d.Factors;*/});
+        .data(data, function(d) {return d.Factors; /*+':'+d.Factors;*/});
 
-    cards.append("title");
-    cards.enter().append("rect")
-    //cards.append("rect")
-        .attr("x", function(d,i) { return (i - 1) * gridSize; })
-        .attr("y", function(d,i) { gridSize; /*return (i - 1) * gridSize*/; })
+    //cards.append("title");
+    //cards.enter().append("rect")
+    cards.append("rect")
+        .attr("x", function(d,i) { 
+            return dateStuff.indexOf(d.Date) * gridSize; 
+        })
+        .attr("y", function(d,i) { 
+            return stuff.indexOf(d.Factors)*gridSize; /*return (i - 1) * gridSize*/;
+         })
         .attr("rx", 4)
         .attr("ry", 4)
         .attr("class", "hour bordered")
