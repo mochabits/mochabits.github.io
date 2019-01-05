@@ -51,7 +51,7 @@ d3.csv("data.csv", function(data) {
     .range(colors);
 
     // draw the heatmap called cards
-    var cards = svg.selectAll(".value")
+    var cards = svg.selectAll(".Value")
         .data(data, function(d) {return d.Date; /*+':'+d.Factors;*/});
 
     cards.append("title");
