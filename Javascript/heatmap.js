@@ -36,7 +36,7 @@ d3.csv("data.csv", function(data) {
         .attr("class", function(d, i) { return ((i >= 7 && i <= 16) ? "timeLabel mono axis axis-worktime" : "timeLabel mono axis"); });
     
     // y axis Factors
-    var factorLabels = svg.selectAll(".functionLabel")
+    var factorLabels = svg.selectAll(".factorLabel")
     .data(data, function(d){ return d.Factor;})
     .enter().append("text")
     .text(function (d) { return d.Factor; })
