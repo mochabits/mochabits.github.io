@@ -2,9 +2,9 @@
 
 // chart settings
 var margin = { top: 50, right: 0, bottom: 100, left: 30 },
-width = 960 - margin.left - margin.right,
-height = 430 - margin.top - margin.bottom,
-gridSize = Math.floor(width / 24),
+width = 1000 - margin.left - margin.right,
+height = 600 - margin.top - margin.bottom,
+gridSize = Math.floor(width / 10),
 legendElementWidth = gridSize*2,
 buckets = 9,
 colors = ["#ffffd9","#edf8b1","#c7e9b4","#7fcdbb","#41b6c4","#1d91c0","#225ea8","#253494","#081d58"], // alternatively colorbrewer.YlGnBu[9]
@@ -23,7 +23,7 @@ var svg = d3.select("#chart").append("svg")
 
 d3.csv(data.csv, function(data) {
     var dateLabels = svg.selectAll(".DateLabel")
-        .data(data, function(d){ return d.Date})
+        .data(data, function(d){ return d.Date;})
         .enter()
         .append("text")
         .text(function(d) {return d;})
