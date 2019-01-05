@@ -21,6 +21,7 @@ var svg = d3.select("#chart").append("svg")
 .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
 d3.csv("data.csv", function(data) {
+    //console.log(data);
     var factors = [];
     var dates = [];
 
@@ -32,11 +33,7 @@ d3.csv("data.csv", function(data) {
             dates.push(data[i].Date);
         }
     }
-//console.log(dates);
- 
-
-d3.csv("data.csv", function(data) {
-    console.log(data);
+    //console.log(dates);   
     // x axis Dates
     var dateLabels = svg.selectAll(".DateLabel")
         .data(data, function(d){ return d.Date;})
