@@ -56,9 +56,9 @@ d3.csv("data.csv", function(data) {
     var cards = svg.selectAll(".Value")
         .data(data, function(d) {return d.Date+':'+d.Factors;});
 
-    //cards.append("title");
-    //cards.enter().append("rect")
-    cards.append("rect")
+    cards.append("title");
+    cards.enter().append("rect")
+    //cards.append("rect")
         .attr("x", function(d,i) { 
             return (dateStuff.indexOf(d.Date) * gridSize); 
         })
