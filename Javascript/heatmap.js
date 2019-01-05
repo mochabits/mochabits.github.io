@@ -57,8 +57,8 @@ d3.csv("data.csv", function(data) {
     cards.append("title");
     cards.enter().append("rect")
     //cards.append("rect")
-        .attr("x", function(d) { return (d.Date - 1) * gridSize; })
-        .attr("y", function(d) { return (d.Factors - 1) * gridSize; })
+        .attr("x", function(d,i) { return (i - 1) * gridSize; })
+        .attr("y", function(d,i) { return (i- 1) * gridSize; })
         .attr("rx", 4)
         .attr("ry", 4)
         .attr("class", "hour bordered")
@@ -67,9 +67,9 @@ d3.csv("data.csv", function(data) {
         .style("fill", colors[0]);
 
     cards.transition().duration(1000)
-        .style("fill", function(d) { return colorScale(d.value); });
+        .style("fill", function(d) { return colorScale(d.Value); });
 
-    cards.select("title").text(function(d) { return d.value; });
+    cards.select("title").text(function(d) { return d.Value; });
 
     cards.exit().remove();   
     });
