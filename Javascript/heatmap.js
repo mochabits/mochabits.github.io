@@ -27,7 +27,7 @@ d3.csv("data.csv", function(data) {
         .data(data, function(d){ return d.Date;})
         .enter()
         .append("text")
-        .text(function(d) {return d;})
+        .text(function(d) {return d.Date;})
         .attr("x", function(d, i) { return i * gridSize; })
         .attr("y", 0)
         .style("text-anchor", "middle")
