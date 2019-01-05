@@ -1,84 +1,110 @@
-var itemSize = 22,
-cellSize = itemSize - 1,
-margin = {top: 120, right: 20, bottom: 20, left: 110};
+var margin = { top: 50, right: 0, bottom: 100, left: 30 },
+width = 960 - margin.left - margin.right,
+height = 430 - margin.top - margin.bottom,
+gridSize = Math.floor(width / 24),
+legendElementWidth = gridSize*2,
+buckets = 9,
+colors = ["#ffffd9","#edf8b1","#c7e9b4","#7fcdbb","#41b6c4","#1d91c0","#225ea8","#253494","#081d58"], // alternatively colorbrewer.YlGnBu[9]
+days = ["Mo", "Tu", "We", "Th", "Fr", "Sa", "Su"],
+times = ["1a", "2a", "3a", "4a", "5a", "6a", "7a", "8a", "9a", "10a", "11a", "12a", "1p", "2p", "3p", "4p", "5p", "6p", "7p", "8p", "9p", "10p", "11p", "12p"];
+datasets = ["data.tsv", "data2.tsv"];
 
-var width = 750 - margin.right - margin.left,
-height = 300 - margin.top - margin.bottom;
+var svg = d3.select("#chart").append("svg")
+.attr("width", width + margin.left + margin.right)
+.attr("height", height + margin.top + margin.bottom)
+.append("g")
+.attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
-var formatDate = d3.time.format("%Y-%m-%d");
+var dayLabels = svg.selectAll(".dayLabel")
+.data(days)
+.enter().append("text")
+  .text(function (d) { return d; })
+  .attr("x", 0)
+  .attr("y", function (d, i) { return i * gridSize; })
+  .style("text-anchor", "end")
+  .attr("transform", "translate(-6," + gridSize / 1.5 + ")")
+  .attr("class", function (d, i) { return ((i >= 0 && i <= 4) ? "dayLabel mono axis axis-workweek" : "dayLabel mono axis"); });
 
-d3.csv('data.csv', function ( response ) {
+var timeLabels = svg.selectAll(".timeLabel")
+.data(times)
+.enter().append("text")
+  .text(function(d) { return d; })
+  .attr("x", function(d, i) { return i * gridSize; })
+  .attr("y", 0)
+  .style("text-anchor", "middle")
+  .attr("transform", "translate(" + gridSize / 2 + ", -6)")
+  .attr("class", function(d, i) { return ((i >= 7 && i <= 16) ? "timeLabel mono axis axis-worktime" : "timeLabel mono axis"); });
 
-var data = response.map(function( item ) {
-  var newItem = {};
-  newItem.country = item.x;
-  newItem.product = item.y;
-  newItem.value = item.value;
+var heatmapChart = function(tsvFile) {
+d3.tsv(tsvFile,
+function(d) {
+return {
+  day: +d.day,
+  hour: +d.hour,
+  value: +d.value
+};
+},
+function(error, data) {
+var colorScale = d3.scale.quantile()
+    .domain([0, buckets - 1, d3.max(data, function (d) { return d.value; })])
+    .range(colors);
 
-  return newItem;
-})
+var cards = svg.selectAll(".hour")
+    .data(data, function(d) {return d.day+':'+d.hour;});
 
-var x_elements = d3.set(data.map(function( item ) { return item.product; } )).values(),
-  y_elements = d3.set(data.map(function( item ) { return item.country; } )).values();
+cards.append("title");
 
-var xScale = d3.scale.ordinal()
-  .domain(x_elements)
-  .rangeBands([0, x_elements.length * itemSize]);
+cards.enter().append("rect")
+    .attr("x", function(d) { return (d.hour - 1) * gridSize; })
+    .attr("y", function(d) { return (d.day - 1) * gridSize; })
+    .attr("rx", 4)
+    .attr("ry", 4)
+    .attr("class", "hour bordered")
+    .attr("width", gridSize)
+    .attr("height", gridSize)
+    .style("fill", colors[0]);
 
-var xAxis = d3.svg.axis()
-  .scale(xScale)
-  .tickFormat(function (d) {
-      return d;
-  })
-  .orient("top");
+cards.transition().duration(1000)
+    .style("fill", function(d) { return colorScale(d.value); });
 
-var yScale = d3.scale.ordinal()
-  .domain(y_elements)
-  .rangeBands([0, y_elements.length * itemSize]);
+cards.select("title").text(function(d) { return d.value; });
 
-var yAxis = d3.svg.axis()
-  .scale(yScale)
-  .tickFormat(function (d) {
-      return d;
-  })
-  .orient("left");
+cards.exit().remove();
 
-var colorScale = d3.scale.threshold()
-  .domain([0.85, 1])
-  .range(["#2980B9", "#E67E22", "#27AE60", "#27AE60"]);
+var legend = svg.selectAll(".legend")
+    .data([0].concat(colorScale.quantiles()), function(d) { return d; });
 
-var svg = d3.select('.heatmap')
-  .append("svg")
-  .attr("width", width + margin.left + margin.right)
-  .attr("height", height + margin.top + margin.bottom)
-  .append("g")
-  .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+legend.enter().append("g")
+    .attr("class", "legend");
 
-var cells = svg.selectAll('rect')
-  .data(data)
-  .enter().append('g').append('rect')
-  .attr('class', 'cell')
-  .attr('width', cellSize)
-  .attr('height', cellSize)
-  .attr('y', function(d) { return yScale(d.country); })
-  .attr('x', function(d) { return xScale(d.product); })
-  .attr('fill', function(d) { return colorScale(d.value); });
+legend.append("rect")
+  .attr("x", function(d, i) { return legendElementWidth * i; })
+  .attr("y", height)
+  .attr("width", legendElementWidth)
+  .attr("height", gridSize / 2)
+  .style("fill", function(d, i) { return colors[i]; });
 
-svg.append("g")
-  .attr("class", "y axis")
-  .call(yAxis)
-  .selectAll('text')
-  .attr('font-weight', 'normal');
+legend.append("text")
+  .attr("class", "mono")
+  .text(function(d) { return "≥ " + Math.round(d); })
+  .attr("x", function(d, i) { return legendElementWidth * i; })
+  .attr("y", height + gridSize);
 
-svg.append("g")
-  .attr("class", "x axis")
-  .call(xAxis)
-  .selectAll('text')
-  .attr('font-weight', 'normal')
-  .style("text-anchor", "start")
-  .attr("dx", ".8em")
-  .attr("dy", ".5em")
-  .attr("transform", function (d) {
-      return "rotate(-65)";
-  });
+legend.exit().remove();
+
+});  
+};
+
+heatmapChart(datasets[0]);
+
+var datasetpicker = d3.select("#dataset-picker").selectAll(".dataset-button")
+.data(datasets);
+
+datasetpicker.enter()
+.append("input")
+.attr("value", function(d){ return "Dataset " + d })
+.attr("type", "button")
+.attr("class", "dataset-button")
+.on("click", function(d) {
+heatmapChart(d);
 });
