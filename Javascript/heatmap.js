@@ -20,6 +20,19 @@ var svg = d3.select("#chart").append("svg")
 .append("g")
 .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
+d3.csv("data.csv", function(data) {
+    var factors = [];
+    var dates = [];
+
+    for (var i = 0; i < data.length; i++) {
+        if (factors.indexOf(data[i].Factors) === -1) {
+            factors.push(data[i].Factors)
+        }
+        if (dates.indexOf(data[i].Date) === -1) {
+            dates.push(data[i].Date);
+        }
+    }
+//console.log(dates);
  
 
 d3.csv("data.csv", function(data) {
