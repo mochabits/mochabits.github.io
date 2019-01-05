@@ -52,13 +52,13 @@ d3.csv("data.csv", function(data) {
 
     // draw the heatmap called cards
     var cards = svg.selectAll(".value")
-        .data(data, function(d) {return d.Date+':'+d.Factors;});
+        .data(data, function(d) {return d.Date; /*+':'+d.Factors;*/});
 
     cards.append("title");
     cards.enter().append("rect")
     //cards.append("rect")
         .attr("x", function(d,i) { return (i - 1) * gridSize; })
-        .attr("y", function(d,i) { return (i- 1) * gridSize; })
+        .attr("y", function(d,i) { gridSize; /*return (i - 1) * gridSize*/; })
         .attr("rx", 4)
         .attr("ry", 4)
         .attr("class", "hour bordered")
