@@ -54,16 +54,16 @@ d3.csv("data.csv", function(data) {
     // draw the heatmap cards
     // outer factors loop
     var cards = svg.selectAll(".Value")
-        .data(data, function(d) {return d.Factors; /*+':'+d.Factors;*/});
+        .data(data, function(d) {return d.Date+':'+d.Factors;});
 
     //cards.append("title");
     //cards.enter().append("rect")
     cards.append("rect")
         .attr("x", function(d,i) { 
-            return dateStuff.indexOf(d.Date) * gridSize; 
+            return (dateStuff.indexOf(d.Date) * gridSize); 
         })
         .attr("y", function(d,i) { 
-            return stuff.indexOf(d.Factors)*gridSize; /*return (i - 1) * gridSize*/;
+            return (stuff.indexOf(d.Factors)*gridSize); /*return (i - 1) * gridSize*/
          })
         .attr("rx", 4)
         .attr("ry", 4)
