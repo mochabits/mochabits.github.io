@@ -46,6 +46,32 @@ d3.csv("data.csv", function(data) {
     .attr("transform", "translate(-6," + gridSize / 1.5 + ")")
     .attr("class", function (d, i) { return ((i >= 0 && i <= 4) ? "dayLabel mono axis axis-workweek" : "dayLabel mono axis"); });
 
+    var colorScale = d3.scale.quantile()
+    .domain([0, buckets - 1, d3.max(data, function (d) { return d.value; })])
+    .range(colors);
+
+    // draw the heatmap called cards
+    var cards = svg.selectAll(".value")
+        .data(data, function(d) {return d.Date+':'+d.Factors;});
+
+    cards.append("title");
+    cards.enter().append("rect")
+    //cards.append("rect")
+        .attr("x", function(d) { return (d.Date - 1) * gridSize; })
+        .attr("y", function(d) { return (d.Factors - 1) * gridSize; })
+        .attr("rx", 4)
+        .attr("ry", 4)
+        .attr("class", "hour bordered")
+        .attr("width", gridSize)
+        .attr("height", gridSize)
+        .style("fill", colors[0]);
+
+    cards.transition().duration(1000)
+        .style("fill", function(d) { return colorScale(d.value); });
+
+    cards.select("title").text(function(d) { return d.value; });
+
+    cards.exit().remove();   
     });
 
 
