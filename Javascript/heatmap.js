@@ -12,7 +12,7 @@ colors = ["#ffffd9","#edf8b1","#c7e9b4","#7fcdbb","#41b6c4","#1d91c0","#225ea8",
 //days = ["Mo", "Tu", "We", "Th", "Fr", "Sa", "Su"],
 //times = ["1a", "2a", "3a", "4a", "5a", "6a", "7a", "8a", "9a", "10a", "11a", "12a", "1p", "2p", "3p", "4p", "5p", "6p", "7p", "8p", "9p", "10p", "11p", "12p"];
 //datasets = ["data.tsv", "data2.tsv"];
-var stuff =["Temp High", "Temp Low", "Rain", "Snow"];
+//var stuff =["Temp High", "Temp Low", "Rain", "Snow"];
 var dateStuff = ["1/1/2019", "1/2/2019", "1/3/2019", "1/4/2019", "1/5/2019"];
 var svg = d3.select("#chart").append("svg")
 .attr("width", width + margin.left + margin.right)
@@ -70,10 +70,10 @@ d3.csv("data.csv", function(data) {
     cards.enter().append("rect")
     //cards.append("rect")
         .attr("x", function(d,i) { 
-            return (dateStuff.indexOf(d.Date) * gridSize); 
+            return (dates.indexOf(d.Date) * gridSize); 
         })
         .attr("y", function(d,i) { 
-            return (stuff.indexOf(d.Factors)*gridSize); /*return (i - 1) * gridSize*/
+            return (factors.indexOf(d.Factors)*gridSize); /*return (i - 1) * gridSize*/
          })
         .attr("rx", 4)
         .attr("ry", 4)
