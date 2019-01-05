@@ -37,9 +37,9 @@ d3.csv("data.csv", function(data) {
     
     // y axis Factors
     var factorLabels = svg.selectAll(".factorLabel")
-    .data(data, function(d){ return d.Factor;})
+    .data(data, function(d){ return d.Factors;})
     .enter().append("text")
-    .text(function (d) { return d.Factor; })
+    .text(function (d) { return d.Factors; })
     .attr("x", 0)
     .attr("y", function (d, i) { return i * gridSize; })
     .style("text-anchor", "end")
