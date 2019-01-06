@@ -31,12 +31,12 @@ var svg = d3.select("#chart") // default SVG ID
     .attr("height", pbi.height )
     //.append("g")
     //.attr("transform", "translate(" + margin.left + "," + margin.top + ")");
- 
-    
+   
 d3.csv("data.csv", function(data) {
 //pbi.dsv(function(data) {
     var factors = [];
     var dates = [];
+    
 	// build arrays for x and y axes
     for (var i = 0; i < data.length; i++) {
         if (factors.indexOf(data[i].factor) === -1) {
