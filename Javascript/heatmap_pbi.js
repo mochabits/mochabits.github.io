@@ -85,8 +85,8 @@ d3.csv("data.csv", function(data) {
     .range(colors)
     .interpolate(d3.interpolateHcl);
  
-    console.log("min and max value");
-    console.log(d3.extent(data, function (d) { return parseInt(d.value); }));
+    //console.log("min and max value");
+    //console.log(d3.extent(data, function (d) { return parseInt(d.value); }));
 
     var cards = svg.selectAll(".Value")
         .data(data, function(d) {return d.date+':'+d.factor;});
