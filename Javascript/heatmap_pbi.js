@@ -20,7 +20,7 @@ var margin = { top: 20, right: 60, bottom: 60, left: 30 },
     xGridSize = Math.floor(width / 4.2),
     yGridSize = Math.floor(height / 3.3),
     buckets = 9,
-    colors = ["#2166ac","#4393c3","#92c5de","#d1e5f0","#f7f7f7","#fddbc7","#f4a582","#d6604d","#b2182b"]; // alternatively colorbrewer.YlGnBu[9]
+    colors = ["#67a9cf", "#f7f7f7", "#ef8a62"]; 
 
 var x = d3.scale.linear().range([0, width]),
     y = d3.scale.linear().range([0, height]);
@@ -34,10 +34,11 @@ var svg = d3.select("#chart") // default SVG ID
    
 d3.csv("data.csv", function(data) {
 //pbi.dsv(function(data) {
+
+    // build arrays for x and y axes
     var factors = [];
     var dates = [];
-    
-	// build arrays for x and y axes
+
     for (var i = 0; i < data.length; i++) {
         if (factors.indexOf(data[i].factor) === -1) {
             factors.push(data[i].factor);
@@ -77,11 +78,13 @@ d3.csv("data.csv", function(data) {
 */	
   	// Color scale
     var colorScale = d3.scale
-    .quantile()
+    .linear()
     .domain([d3.min(data, function (d) { return  parseInt(d.value); }), 
-            //buckets - 1, 
+            0, 
             d3.max(data, function (d) { return parseInt(d.value); })])
-    .range(colors);
+    .range(colors)
+    .interpolate(d3.interpolateHcl);
+ 
     console.log("min and max value");
     console.log(d3.extent(data, function (d) { return parseInt(d.value); }));
 
@@ -91,14 +94,11 @@ d3.csv("data.csv", function(data) {
   	// Calculate the domains based on the data:
     x.domain(d3.extent(data, function(d) { return dates.indexOf(d.date); }));
     y.domain(d3.extent(data, function(d) { return factors.indexOf(d.factor); }));
-    console.log("x input domain");
-    console.log(d3.extent(data, function(d) { return dates.indexOf(d.date); }));
-    console.log("yinput domain");
-    console.log(d3.extent(data, function(d) { return factors.indexOf(d.factor); }));
-
+ 
     // Heatmap
     cards.append("title");
     cards.enter().append("rect")
+    
     //cards.append("rect")
         .attr("x", function(d,i) { 
             return x(dates.indexOf(d.date)); 
@@ -106,25 +106,27 @@ d3.csv("data.csv", function(data) {
         .attr("y", function(d,i) { 
             return y(factors.indexOf(d.factor)); 
          })
-        //.attr("rx", 4)
-        //.attr("ry", 4)
         .attr("width", xGridSize)
         .attr("height",yGridSize)
         .style("fill", colors[0]);
+ 
     cards.transition().duration(1000)
          .style("fill", function(d) { return colorScale(d.value); });
-    cards.select("title").text(function(d) { return d.value; });
+    cards.select("title").text(function(d) { 
+        return d.value; 
+    });
     cards.exit().remove();   
     
     // insert value for each card
     cards.enter().append("text")
      .attr("x", function(d,i) { 
-        return x(dates.indexOf(d.date)); 
+        return x(dates.indexOf(d.date))+xGridSize/2; 
     })
     .attr("y", function(d,i) { 
-        return y(factors.indexOf(d.factor)); 
+        return y(factors.indexOf(d.factor))+yGridSize/2; 
      })
-    .attr("dy", ".35em")
+    .attr("class","valueLabel")
+    //.attr("dy", ".35em")
     .text(function(d) { return d.value; });          
     });
    
