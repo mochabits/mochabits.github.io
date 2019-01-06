@@ -13,16 +13,14 @@
  * 
  * Code is based on: http://bl.ocks.org/tjdecke/5558084
  */
-
-var margin = { top: 2, right: 2, bottom: 2, left: 2 },
+var pbi = {width:500,height:270};
+var margin = { top: 20, right: 60, bottom: 60, left: 30 },
     width = pbi.width - margin.left - margin.right,   
     height = pbi.height - margin.top - margin.bottom, 
-    xGridSize = Math.floor(width / 5),
-    yGridSize = Math.floor(height / 10),
-    //yPlaceHolder = 4,
-    //legendElementWidth = xGridSize*3,
+    xGridSize = Math.floor(width / 4.2),
+    yGridSize = Math.floor(height / 3.3),
     buckets = 9,
-    colors = ["#ffffd9","#edf8b1","#c7e9b4","#7fcdbb","#41b6c4","#1d91c0","#225ea8","#253494","#081d58"]; // alternatively colorbrewer.YlGnBu[9]
+    colors = ["#2166ac","#4393c3","#92c5de","#d1e5f0","#f7f7f7","#fddbc7","#f4a582","#d6604d","#b2182b"]; // alternatively colorbrewer.YlGnBu[9]
 
 var x = d3.scale.linear().range([0, width]),
     y = d3.scale.linear().range([0, height]);
@@ -31,10 +29,12 @@ var x = d3.scale.linear().range([0, width]),
 var svg = d3.select("#chart") // default SVG ID
     .attr("width", pbi.width )   
     .attr("height", pbi.height )
-    .append("g")
-    .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
-
-pbi.dsv(function(data) {
+    //.append("g")
+    //.attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+ 
+    
+d3.csv("data.csv", function(data) {
+//pbi.dsv(function(data) {
     var factors = [];
     var dates = [];
 	// build arrays for x and y axes
@@ -47,6 +47,10 @@ pbi.dsv(function(data) {
             dates.push(data[i].date);
         }
     }
+    factors.sort();
+    dates.sort();
+    console.log(factors);
+    console.log(dates);
   /*
  	// X Axis
 	var dateLabels = 
@@ -71,10 +75,15 @@ pbi.dsv(function(data) {
         .style("text-anchor", "end")
         .attr("transform", "translate(-6," + yGridSize / 1.5 + ")");
 */	
-  	// Heatmap
-    var colorScale = d3.scale.quantile()
-    .domain([0, buckets - 1, d3.max(data, function (d) { return d.value; })])
+  	// Color scale
+    var colorScale = d3.scale
+    .quantile()
+    .domain([d3.min(data, function (d) { return  parseInt(d.value); }), 
+            //buckets - 1, 
+            d3.max(data, function (d) { return parseInt(d.value); })])
     .range(colors);
+    console.log("min and max value");
+    console.log(d3.extent(data, function (d) { return parseInt(d.value); }));
 
     var cards = svg.selectAll(".Value")
         .data(data, function(d) {return d.date+':'+d.factor;});
@@ -82,7 +91,12 @@ pbi.dsv(function(data) {
   	// Calculate the domains based on the data:
     x.domain(d3.extent(data, function(d) { return dates.indexOf(d.date); }));
     y.domain(d3.extent(data, function(d) { return factors.indexOf(d.factor); }));
+    console.log("x input domain");
+    console.log(d3.extent(data, function(d) { return dates.indexOf(d.date); }));
+    console.log("yinput domain");
+    console.log(d3.extent(data, function(d) { return factors.indexOf(d.factor); }));
 
+    // Heatmap
     cards.append("title");
     cards.enter().append("rect")
     //cards.append("rect")
@@ -101,5 +115,16 @@ pbi.dsv(function(data) {
          .style("fill", function(d) { return colorScale(d.value); });
     cards.select("title").text(function(d) { return d.value; });
     cards.exit().remove();   
+    
+    // insert value for each card
+    cards.enter().append("text")
+     .attr("x", function(d,i) { 
+        return x(dates.indexOf(d.date)); 
+    })
+    .attr("y", function(d,i) { 
+        return y(factors.indexOf(d.factor)); 
+     })
+    .attr("dy", ".35em")
+    .text(function(d) { return d.value; });          
     });
    
