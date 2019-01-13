@@ -1,0 +1,5 @@
+const game = {
+    "suspects"
+
+
+}
