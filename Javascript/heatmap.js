@@ -15,7 +15,7 @@
  * Remember to comment / uncomment var pbi and pbi.dsv(function(data) { 
  */
 
-//var pbi = {width:500,height:270};
+var pbi = {width:500,height:270};
 var margin = { top: 20, right: 70, bottom: 60, left: 30 },
     width = pbi.width - margin.left - margin.right,   
     height = pbi.height - margin.top - margin.bottom, 
@@ -26,7 +26,7 @@ var margin = { top: 20, right: 70, bottom: 60, left: 30 },
 var x = d3.scale.linear().range([0, width]),
     y = d3.scale.linear().range([0, height]);
 
-// Text Color object. It has to be placed before the callback function is called
+// Text Color object. It has to be declared before the callback function is called
 var textColor = {
         hex_to_rgb: function(hex) {
             var result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);         	
@@ -48,8 +48,8 @@ var svg = d3.select("#chart") // default SVG ID
     .attr("width", pbi.width )   
     .attr("height", pbi.height )
    
-//d3.csv("data.csv", function(data) {
-pbi.dsv(function(data) {
+d3.csv("data.csv", function(data) {
+//pbi.dsv(function(data) {
 
     // build arrays for x and y axes
     var factors = []; // y axis
@@ -125,7 +125,52 @@ pbi.dsv(function(data) {
          })
         .attr("width", xGridSize)
         .attr("height",yGridSize)
-        .style("fill", colors[1]);
+        .style("fill", colors[1])
+        .on('mouseover', function(d) {
+            //console.log(d)
+            svg.append("rect")
+            .style("fill", "white")
+            .attr({
+                id: function () {return "t" + dates.indexOf(d.date) + "-" +factors.indexOf(d.factor) },  
+                // Create an id for text so we can select it later for removing on mouseout
+                
+                 x: function() { 
+                    return x(dates.indexOf(d.date))+xGridSize/2 - 25; 
+                },
+                 y: function() { 
+                    return y(factors.indexOf(d.factor))+yGridSize/2 -25; 
+                 },
+                 width: xGridSize,
+                 height: yGridSize,
+                 "pointer-events": "none"
+             })
+             ;
+
+             svg.append("text").attr({
+                id: function () {return "tt" + dates.indexOf(d.date) + "-" +factors.indexOf(d.factor) },  
+                // Create an id for text so we can select it later for removing on mouseout
+                
+                 x: function() { 
+                    return x(dates.indexOf(d.date))+xGridSize/2 - 25; 
+                },
+                 y: function() { 
+                    return y(factors.indexOf(d.factor))+yGridSize/2 ; 
+                 },
+                 
+                "pointer-events": "none"
+             }).attr("font-size", "0.7em")
+             .attr("color", "black")
+             .text(function() {
+                 return  d.date + ":" +d.factor + ":" + d.value;
+                })
+          }) 
+          .on('mouseout', function(d) {
+            d3.select("#t" + dates.indexOf(d.date) + "-" +factors.indexOf(d.factor) ).remove();
+            d3.select("#tt" + dates.indexOf(d.date) + "-" +factors.indexOf(d.factor) ).remove();
+             // Remove text location
+          });               
+        
+        
  
     cards.transition().duration(1000)
          .style("fill", function(d) { return colorScale(d.value); });
@@ -144,6 +189,7 @@ pbi.dsv(function(data) {
      })
     .attr("dominant-baseline","middle")
     .attr("class","valueLabel")
+    .attr("pointer-events", "none")
     .style("fill",function(d) { 
   					return textColor.hex_inverse_bw(colorScale(d.value)); 
     	})	
