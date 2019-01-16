@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+		<title>Bing Map - Edmonton</title>
+        <style>
+            #myMap {
+                position: relative;
+                width: 500px;
+                height: 600px;
+            }
+        </style>
+	</head>
+<body>
+
+    <div id="myMap"></div>
+    <!-- Reference to the Bing Maps SDK -->
+    <script type='text/javascript' src='https://www.bing.com/api/maps/mapcontrol?callback=GetMap' async defer></script>  
+    <script type='text/javascript' src='points.js'></script>  
+    <script type="text/javascript">
+        function GetMap()  
+        {
+            var map = new Microsoft.Maps.Map('#myMap', {
+                credentials: 'AnbTnbpnUVaFW6D6XQjMbNJ5VyCVjfWxOnjKfeEC2yh9_scJ0xuOdspStFhQ6zsY', //Bing map key
+                center: new Microsoft.Maps.Location(53.541405,-113.495858), // Edmonton 
+                mapTypeId: Microsoft.Maps.MapTypeId.road, // map type is road
+                zoom: 10
+            });
+
+            //Load traffic module
+            Microsoft.Maps.loadModule('Microsoft.Maps.Traffic', function () {          
+                //Create an instance of the traffic manager and bind to map.
+                trafficManager = new Microsoft.Maps.Traffic.TrafficManager(map).show();                  
+                });
+
+            for (var i = 0; i < points.length; i++) {
+                console.log(points[i].region);
+                //Create a polygon
+                var polygon = new Microsoft.Maps.Polygon(convertToArrayOfObjects(points[i].region), {
+                    fillColor: 'rgba(0, 255, 0, 0.3)',
+                    strokeColor: 'red',
+                    strokeThickness: 2
+                });
+                //Add the polygon to map
+                map.entities.push(polygon);
+ 
+            }
+ }
+        function convertToArrayOfObjects(d) { // format: [[53.55555, -113.888888], ...]
+            var output =[];
+            for (var i=0; i < d.length; i++) {
+                 output.push({
+                    longitude: d[i][0],
+                    latitude: d[i][1]
+                })
+            }
+            return output;
+        }
+     </script>
+
+</body>
+</html>
