@@ -15,15 +15,15 @@ const graph = svg.append('g')
   .attr('transform', `translate(${margin.left}, ${margin.top})`);
 
 // create axes groups
-const xAxisGroup = graph.append('g')
+const xAxisGroup = graph.append("g")
   .attr('transform', `translate(0, ${graphHeight})`)
 
 const yAxisGroup = graph.append('g');
 
-d3.json('menu.json').then(data => {
-
+d3.json('menu.json').then(function (data) { 
+  console.log(data);
   const y = d3.scaleLinear()
-    .domain([0, d3.max(data, d => d.orders)])
+    .domain([0, d3.max(function (d) {return d.orders;})])
     .range([graphHeight, 0]);
 
   const x = d3.scaleBand()
